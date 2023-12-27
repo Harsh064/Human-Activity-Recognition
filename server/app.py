@@ -35,3 +35,18 @@ def viaVideo():
     return send_from_directory(app.config['OUTPUT_FOLDER'], f'{filename}{fileextension}')
     # return { "success": True, "description": "file received" }
     # return Response(generate_frames(output_video_file_path),mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route("/upload/url", methods=["POST"])
+def viaURL():
+    print(request.form["url"])
+    url = request.form["url"]
+    filename = filename = dt.datetime.now().strftime("%d%m%Y%H%M%S%f")
+    fileextension = '.mp4'
+    download_youtube_video(url, app.config['UPLOAD_FOLDER'], f'{filename}{fileextension}')
+    video_file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{filename}{fileextension}')
+
+    window_size = 25
+    output_video_file_path = os.path.join(app.config['OUTPUT_FOLDER'], f'{filename}{fileextension}')
+    predict_on_video(video_file_path, output_video_file_path, window_size)
+    return send_from_directory(app.config['OUTPUT_FOLDER'], f'{filename}{fileextension}')
+    # return jsonify({ "success": True, "description": "url received" })
