@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Upload from "./components/Upload";
+import Home from "./components/Home";
 import UploadviaFile from './components/UploadviaFile';
 import UploadviaURL from './components/UploadviaURL';
 
@@ -11,7 +11,7 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path='' element={<Upload video={video} setVideo={setVideo} />}>
+          <Route path='' element={<Home video={video} setVideo={setVideo} />}>
             <Route path='viaVideo' element={<UploadviaFile setVideo={setVideo} />} />
             <Route path='viaURL' element={<UploadviaURL setVideo={setVideo} />} />
           </Route>
