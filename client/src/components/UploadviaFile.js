@@ -2,12 +2,6 @@ import React from 'react';
 
 export default function UploadviaFile({ setVideo }) {
   async function uploadVideo(e) {
-    // const reader = new FileReader();
-    // reader.readAsDataURL(e.target.files[0]);
-    // reader.onload = (e) => {
-    //   setVideo(e.target.result);
-    // }
-
     const formdata = new FormData();
     formdata.append("video", e.target.files[0]);
     
