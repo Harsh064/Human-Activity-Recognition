@@ -55,11 +55,11 @@ export default function Home({ video, setVideo }) {
         </div>
         <div>
           <div className='grid grid-cols-2 p-2 border-b-[1px] border-gray-300'>
-            <Link to={"viaVideo"} onClick={() => handleUploadviaVideo()} className='pb-2 grid place-items-center rounded hover:bg-gray-100'>
+            <Link to={"viaVideo"} onClick={() => setVideo("")} className='pb-2 grid place-items-center rounded hover:bg-gray-100'>
               <img src={uploadIcon} alt="" className='w-14' />
               <p className='text-lg text-slate-400 font-semibold'>Upload a video file</p>
             </Link>
-            <Link to={"viaURL"} onClick={() => handleUploadviaURL()} className='pb-2 grid place-items-center rounded hover:bg-gray-100'>
+            <Link to={"viaURL"} onClick={() => setVideo("")} className='pb-2 grid place-items-center rounded hover:bg-gray-100'>
               <img src={urlIcon} alt="" className='w-14' />
               <p className='text-lg text-slate-400 font-semibold'>Upload via URL</p>
             </Link>
