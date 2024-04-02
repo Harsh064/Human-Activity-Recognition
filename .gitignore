@@ -4,6 +4,8 @@
 client/node_modules
 server/.venv
 __pycache__
+output
+uploads
 /.pnp
 .pnp.js
 
