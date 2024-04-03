@@ -4,8 +4,9 @@ import Alert from './Alert';
 import uploadIcon from '../assets/upload.png';
 import urlIcon from '../assets/url.png';
 import videocamera from '../assets/videocamera.png';
+import ProcessingAnimation from './ProcessingAnimation';
 
-export default function Home({ video, setVideo, alert }) {
+export default function Home({ video, setVideo, alert, processingStatus }) {
   return (
     <div>
       <div className='p-4 border-b-[1px] border-b-gray-300 flex justify-center text-2xl text-slate-600'>Human Activity Recognition</div>
@@ -13,9 +14,15 @@ export default function Home({ video, setVideo, alert }) {
         <div className='grid place-items-center bg-slate-800'>
           {
             video === "" ? 
-            <div className='grid place-items-center text-white'>
-              <img src={videocamera} alt="" className='w-16' />
-              Output of uploaded video
+            <div className='grid place-items-center'>
+              { 
+                processingStatus ?
+                <ProcessingAnimation /> : 
+                <div className='grid place-items-center text-white'>
+                  <img src={videocamera} alt="" className='w-16' />
+                  Output of uploaded video
+                </div>
+              }
             </div> 
             :
             <video src={video} autoPlay loop controls className='w-full max-h-[90vh]'></video>

@@ -1,10 +1,13 @@
 import React from 'react';
+import { popupAlert } from '../utils/popupAlert';
 
-export default function UploadviaFile({ setVideo }) {
+export default function UploadviaFile({ setVideo, setAlert, setProcessingStatus }) {
   async function uploadVideo(e) {
     const formdata = new FormData();
     formdata.append("video", e.target.files[0]);
-    
+    setProcessingStatus(true);
+    setVideo("");
+
     const response = await fetch("http://127.0.0.1:5000/upload/video", {
       method: 'POST',
       headers: {
@@ -18,10 +21,11 @@ export default function UploadviaFile({ setVideo }) {
     const reader = new FileReader();
     reader.readAsDataURL(data);
     reader.onload = (e) => {
-      console.log(e.target.result);
       setVideo(e.target.result);
     }
-    console.log(data);
+
+    setProcessingStatus(false);
+    popupAlert('success', 'Video processing completed and received', setAlert);
   }
   
   return (
