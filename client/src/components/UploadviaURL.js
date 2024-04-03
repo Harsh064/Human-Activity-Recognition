@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { popupAlert } from '../utils/popupAlert';
 
 export default function UploadviaURL({ setVideo, setAlert }) {
   const [url, setUrl] = useState("");
 
   async function uploadURL() {
+    if (url === "") {
+      popupAlert('normal', 'Enter youtube video URL', setAlert);
+      return ;
+    };
+
     const formdata = new FormData();
     formdata.append("url", url);
-
+    
     const response = await fetch("http://127.0.0.1:5000/upload/url", {
       method: 'POST',
       headers: {
@@ -16,6 +22,13 @@ export default function UploadviaURL({ setVideo, setAlert }) {
       body: formdata
     });
     const data = await response.blob();
+
+    if (data.type === 'application/json') {
+      const textdata = await data.text();
+      popupAlert('warning', JSON.parse(textdata).description, setAlert);
+      console.log(JSON.parse(textdata))
+      return ;
+    }
 
     const reader = new FileReader();
     reader.readAsDataURL(data);
