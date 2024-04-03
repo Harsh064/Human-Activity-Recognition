@@ -8,7 +8,8 @@ export default function UploadviaFile({ setVideo }) {
     const response = await fetch("http://127.0.0.1:5000/upload/video", {
       method: 'POST',
       headers: {
-        Accept: "video/*",
+        Accept: "video/*, application/json",
+        "Access-Control-Allow-Credentials": true,
       },
       body: formdata
     });
