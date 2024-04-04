@@ -16,6 +16,23 @@ code {
     monospace;
 }
 
+h2 {
+  display: inline;
+  font-size: 30px;
+  font-weight: bold;
+  background: -webkit-linear-gradient(right,#a855f7 20%, #f43f5e 80%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+#member-name {
+  font-size: 18px;
+  font-weight: 500;
+  background: -webkit-linear-gradient(right,#a855f7 20%, #f43f5e 80%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 #animate-spin {
   animation: spin 3s linear infinite;
 }
