@@ -10,6 +10,13 @@ export default function UploadviaURL({ setVideo, setAlert, setProcessingStatus }
       return ;
     };
 
+    const regex = /^((?:https?:)?\/\/)?(((?:www|m)\.)?(youtube\.com(?:(\/shorts\/|\/watch\/|\/v\/)[\w-]{11}|\/watch\?v=[\w-]{11}((&list=LL)?(&index=[\d]+)?|(&index=[\d]+)?(&list=LL)?)|(\/embed\/[\w-]{11}(\?si=[\w-]{16})?)))|youtu\.be\/[\w-]{11}(\?si=[\w-]{16})?)$/i;
+    console.log(regex.test(url))
+    if (!regex.test(url)) {
+      popupAlert('danger', 'Invalid youtube URL', setAlert);
+      return ;
+    }
+
     const formdata = new FormData();
     formdata.append("url", url);
     setProcessingStatus(true);
@@ -40,21 +47,14 @@ export default function UploadviaURL({ setVideo, setAlert, setProcessingStatus }
     setProcessingStatus(false);
     popupAlert('success', 'Video processing completed and received', setAlert);
   }
-
-  // playing tabla
-  // https://youtube.com/shorts/Ytjm52BZ3fQ?si=SCFg7ml8w-DJG1Wx
-  // walking with dog
-  // https://www.youtube.com/watch?v=XqqpZS0c1K0
-  // doggy
-  // https://youtu.be/z2BgjH_CtIA?si=p9YE8yQ5ApZ5NdWQ
-
+  
   return (
     <div className='origin-center translate-y-40 grid grid-rows-2 place-items-center'>
       <p className='m-5 text-sm text-gray-400 text-center'>
         Paste below the URL of your Youtube video and hit <br />
         the 'Submit URL' button to upload video
       </p>
-      <input onChange={(e) => setUrl(e.target.value)} autoComplete='false' type="url" name="url" id="" placeholder="http://example.com" className='w-[75%] px-2 py-1 mx-[12.5%] rounded border-[1px] border-gray-400 focus:outline-none' />
+      <input onChange={(e) => setUrl(e.target.value)} autoComplete='false' type="url" name="url" id="" placeholder="http://youtube.com/watch?v=<video-id>" className='w-[75%] px-2 py-1 mx-[12.5%] rounded border-[1px] border-gray-400 focus:outline-none' />
       <button onClick={() => uploadURL()} className='px-4 py-2 rounded bg-blue-500 text-white font-semibold active:bg-blue-400'>Submit URL</button>
     </div>
   )
