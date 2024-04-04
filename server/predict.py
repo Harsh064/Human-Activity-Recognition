@@ -5,9 +5,7 @@ from moviepy.editor import *
 from collections import deque
 
 image_height, image_width = 64, 64
-max_images_per_class = 500
 
-dataset_directory = "UCF50"
 classes_list = ["WalkingWithDog", "Biking", "Swing"]
 # classes_list = all_classes_names
 model_output_size = len(classes_list)

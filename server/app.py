@@ -5,9 +5,8 @@ from moviepy.editor import *
 import datetime as dt
 import os
 
-from predict import make_average_predictions, predict_on_video
+from predict import predict_on_video
 from download_video import download_youtube_video
-from stream_video import generate_frames
 
 app = Flask(__name__)
 UPLOAD_FOLDER = './uploads'
