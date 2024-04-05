@@ -6,10 +6,11 @@ from collections import deque
 
 image_height, image_width = 64, 64
 
-classes_list = ["WalkingWithDog", "Biking", "Swing"]
-# classes_list = all_classes_names
+classes_list = [ 'TrampolineJumping', 'PullUps', 'CleanAndJerk', 'GolfSwing', 'PoleVault', 'HighJump', 'JugglingBalls', 'HulaHoop', 'JumpRope', 'Rowing', 'HorseRace', 'Lunges', 'JumpingJack', 'BreastStroke', 'TennisSwing', 'ThrowDiscus', 'Skiing', 'HorseRiding', 'Skijet', 'SkateBoarding', 'Punch', 'BenchPress', 'RopeClimbing', 'PommelHorse', 'Fencing', 'WalkingWithDog', 'Kayaking', 'Biking', 'SoccerJuggling', 'RockClimbingIndoor', 'JavelinThrow', 'BaseballPitch' ]
+#all_classes_names =
+#classes_list = all_classes_names 
 model_output_size = len(classes_list)
-model = tf.keras.models.load_model('./model/model.h5')
+model = tf.keras.models.load_model('./model/model_physical_activity.h5')
 
 def make_average_predictions(video_file_path, predictions_frames_count):
 
