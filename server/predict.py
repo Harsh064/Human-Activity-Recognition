@@ -3,71 +3,93 @@ import numpy as np
 import tensorflow as tf
 from moviepy.editor import *
 from collections import deque
+from flask_socketio import *
+import base64
 
 image_height, image_width = 64, 64
+# model = tf.keras.models.load_model('./model/model_physical_activity.h5')
+# classes_list = [ 'TrampolineJumping', 'PullUps', 'CleanAndJerk', 'GolfSwing', 'PoleVault', 'HighJump', 'JugglingBalls', 'HulaHoop', 'JumpRope', 'Rowing', 'HorseRace', 'Lunges', 'JumpingJack', 'BreastStroke', 'TennisSwing', 'ThrowDiscus', 'Skiing', 'HorseRiding', 'Skijet', 'SkateBoarding', 'Punch', 'BenchPress', 'RopeClimbing', 'PommelHorse', 'Fencing', 'WalkingWithDog', 'Kayaking', 'Biking', 'SoccerJuggling', 'RockClimbingIndoor', 'JavelinThrow', 'BaseballPitch' ]
 
-classes_list = [ 'TrampolineJumping', 'PullUps', 'CleanAndJerk', 'GolfSwing', 'PoleVault', 'HighJump', 'JugglingBalls', 'HulaHoop', 'JumpRope', 'Rowing', 'HorseRace', 'Lunges', 'JumpingJack', 'BreastStroke', 'TennisSwing', 'ThrowDiscus', 'Skiing', 'HorseRiding', 'Skijet', 'SkateBoarding', 'Punch', 'BenchPress', 'RopeClimbing', 'PommelHorse', 'Fencing', 'WalkingWithDog', 'Kayaking', 'Biking', 'SoccerJuggling', 'RockClimbingIndoor', 'JavelinThrow', 'BaseballPitch' ]
-#all_classes_names =
-#classes_list = all_classes_names 
-model_output_size = len(classes_list)
-model = tf.keras.models.load_model('./model/model_physical_activity.h5')
+# def make_average_predictions(video_file_path, predictions_frames_count, video_activity):
+#     if (video_activity == 0) :
+#         model = tf.keras.models.load_model('./model/model_physical_activity.h5')
+#         classes_list = [ 'TrampolineJumping', 'PullUps', 'CleanAndJerk', 'GolfSwing', 'PoleVault', 'HighJump', 'JugglingBalls', 'HulaHoop', 'JumpRope', 'Rowing', 'HorseRace', 'Lunges', 'JumpingJack', 'BreastStroke', 'TennisSwing', 'ThrowDiscus', 'Skiing', 'HorseRiding', 'Skijet', 'SkateBoarding', 'Punch', 'BenchPress', 'RopeClimbing', 'PommelHorse', 'Fencing', 'WalkingWithDog', 'Kayaking', 'Biking', 'SoccerJuggling', 'RockClimbingIndoor', 'JavelinThrow', 'BaseballPitch' ]
 
-def make_average_predictions(video_file_path, predictions_frames_count):
+#     elif (video_activity == 1) :
+#         model = tf.keras.models.load_model('./model/model_musical_activity.h5')
+#         classes_list = []
+#     else :
+#         model = tf.keras.models.load_model('./model/model_all_activity.h5')
+#         classes_list = []
+    
+#     model_output_size = len(classes_list)
 
-    # Initializing the Numpy array which will store Prediction Probabilities
-    predicted_labels_probabilities_np = np.zeros((predictions_frames_count, model_output_size), dtype = float)
+#     # Initializing the Numpy array which will store Prediction Probabilities
+#     predicted_labels_probabilities_np = np.zeros((predictions_frames_count, model_output_size), dtype = float)
 
-    # Reading the Video File using the VideoCapture Object
-    video_reader = cv2.VideoCapture(video_file_path)
+#     # Reading the Video File using the VideoCapture Object
+#     video_reader = cv2.VideoCapture(video_file_path)
 
-    # Getting The Total Frames present in the video
-    video_frames_count = int(video_reader.get(cv2.CAP_PROP_FRAME_COUNT))
+#     # Getting The Total Frames present in the video
+#     video_frames_count = int(video_reader.get(cv2.CAP_PROP_FRAME_COUNT))
 
-    # Calculating The Number of Frames to skip Before reading a frame
-    skip_frames_window = video_frames_count // predictions_frames_count
+#     # Calculating The Number of Frames to skip Before reading a frame
+#     skip_frames_window = video_frames_count // predictions_frames_count
 
-    for frame_counter in range(predictions_frames_count):
+#     for frame_counter in range(predictions_frames_count):
 
-        # Setting Frame Position
-        video_reader.set(cv2.CAP_PROP_POS_FRAMES, frame_counter * skip_frames_window)
+#         # Setting Frame Position
+#         video_reader.set(cv2.CAP_PROP_POS_FRAMES, frame_counter * skip_frames_window)
 
-        # Reading The Frame
-        _ , frame = video_reader.read()
+#         # Reading The Frame
+#         _ , frame = video_reader.read()
 
-        # Resize the Frame to fixed Dimensions
-        resized_frame = cv2.resize(frame, (image_height, image_width))
+#         # Resize the Frame to fixed Dimensions
+#         resized_frame = cv2.resize(frame, (image_height, image_width))
 
-        # Normalize the resized frame by dividing it with 255 so that each pixel value then lies between 0 and 1
-        normalized_frame = resized_frame / 255
+#         # Normalize the resized frame by dividing it with 255 so that each pixel value then lies between 0 and 1
+#         normalized_frame = resized_frame / 255
 
-        # Passing the Image Normalized Frame to the model and receiving Predicted Probabilities.
-        predicted_labels_probabilities = model.predict(np.expand_dims(normalized_frame, axis = 0))[0]
+#         # Passing the Image Normalized Frame to the model and receiving Predicted Probabilities.
+#         predicted_labels_probabilities = model.predict(np.expand_dims(normalized_frame, axis = 0))[0]
 
-        # Appending predicted label probabilities to the deque object
-        predicted_labels_probabilities_np[frame_counter] = predicted_labels_probabilities
+#         # Appending predicted label probabilities to the deque object
+#         predicted_labels_probabilities_np[frame_counter] = predicted_labels_probabilities
 
-    # Calculating Average of Predicted Labels Probabilities Column Wise
-    predicted_labels_probabilities_averaged = predicted_labels_probabilities_np.mean(axis = 0)
+#     # Calculating Average of Predicted Labels Probabilities Column Wise
+#     predicted_labels_probabilities_averaged = predicted_labels_probabilities_np.mean(axis = 0)
 
-    # Sorting the Averaged Predicted Labels Probabilities
-    predicted_labels_probabilities_averaged_sorted_indexes = np.argsort(predicted_labels_probabilities_averaged)[::-1]
+#     # Sorting the Averaged Predicted Labels Probabilities
+#     predicted_labels_probabilities_averaged_sorted_indexes = np.argsort(predicted_labels_probabilities_averaged)[::-1]
 
-    # Iterating Over All Averaged Predicted Label Probabilities
-    for predicted_label in predicted_labels_probabilities_averaged_sorted_indexes:
+#     # Iterating Over All Averaged Predicted Label Probabilities
+#     for predicted_label in predicted_labels_probabilities_averaged_sorted_indexes:
 
-        # Accessing The Class Name using predicted label.
-        predicted_class_name = classes_list[predicted_label]
+#         # Accessing The Class Name using predicted label.
+#         predicted_class_name = classes_list[predicted_label]
 
-        # Accessing The Averaged Probability using predicted label.
-        predicted_probability = predicted_labels_probabilities_averaged[predicted_label]
+#         # Accessing The Averaged Probability using predicted label.
+#         predicted_probability = predicted_labels_probabilities_averaged[predicted_label]
 
-        print(f"CLASS NAME: {predicted_class_name}   AVERAGED PROBABILITY: {(predicted_probability*100):.2}")
+#         print(f"CLASS NAME: {predicted_class_name}   AVERAGED PROBABILITY: {(predicted_probability*100):.2}")
 
-    # Closing the VideoCapture Object and releasing all resources held by it.
-    video_reader.release()
+#     # Closing the VideoCapture Object and releasing all resources held by it.
+#     video_reader.release()
 
 
-def predict_on_video(video_file_path, output_file_path, window_size):
+def predict_on_video(video_file_path, output_file_path, window_size, video_activity, roomid):
+    if (video_activity == '0') :
+        model = tf.keras.models.load_model('./model/Model_Gym_Activities.h5')
+        classes_list = ['Punch', 'HighJump', 'BenchPress', 'PushUps', 'PullUps', 'JumpingJack', 'Lunges']
+
+    elif (video_activity == '1') :
+        model = tf.keras.models.load_model('./model/Model_Musical_Instruments.h5')
+        classes_list = ['PlayingTabla', 'PlayingViolin', 'PlayingPiano', 'Drumming', 'PlayingGuitar']
+    else :
+        model = tf.keras.models.load_model('./model/Model_Olympic_Games.h5')
+        classes_list = ['HorseRace', 'VolleyballSpiking', 'Biking', 'TaiChi', 'Punch', 'BreastStroke', 'PoleVault', 'ThrowDiscus', 'BaseballPitch', 'HorseRiding', 'Mixing', 'HighJump', 'Fencing', 'Rowing', 'GolfSwing', 'TennisSwing', 'PommelHorse', 'Basketball', 'CleanAndJerk', 'JavelinThrow']
+    
+    model_output_size = len(classes_list)
 
     # Initialize a Deque Object with a fixed size which will be used to implement moving/rolling average functionality.
     predicted_labels_probabilities_deque = deque(maxlen = window_size)
@@ -124,9 +146,13 @@ def predict_on_video(video_file_path, output_file_path, window_size):
         # Writing The Frame
         video_writer.write(frame)
 
+        _, frameBuffer = cv2.imencode('.jpg', frame)
+        frameBuffer = frameBuffer.tobytes()
+        encoded_image = base64.b64encode(frameBuffer)
+        encoded_image = encoded_image.decode(encoding='utf-8')
+        emit('video_frames', encoded_image, to=roomid)
 
         # cv2.imshow('Predicted Frames', frame)
-
         # key_pressed = cv2.waitKey(10)
 
         # if key_pressed == ord('q'):
