@@ -11,6 +11,7 @@ import emailIcon from '../assets/email.png';
 import objectives from '../assets/objectives.png';
 import purpose1 from '../assets/purpose1.png';
 import purpose2 from '../assets/purpose2.png';
+import harProblem from '../assets/HARproblem.png';
 
 export default function Home() {
   return (
@@ -43,16 +44,19 @@ export default function Home() {
       <hr id='about' className='border-none pb-8' />
 
       <div className='p-28 pt-16 pb-16'>
-        <div className='flex justify-center'><h2>ABOUT PROJECT</h2></div>
+        <div className='flex justify-center mb-10'><h2>ABOUT PROJECT</h2></div>
         <h4 className='text-3xl font-semibold'>PROBLEM STATEMENT</h4>
-        <p className='my-5 text-xl'>
-          Create a real-time human activity recognition system using OpenCV and Deep Learning that should be able to idntify 
-          and classify various human activities based on video footage and achieve high accuracy. The goal is to create a website 
-          that can take video or url of video as input and distinguish activity and show the name of activity that was performed 
-          in given video
-        </p>
+        <div className='flex justify-between items-center my-5 text-2xl'>
+          <p className='w-3/5'>
+            Create a real-time human activity recognition system using OpenCV and Deep Learning that should be able to idntify 
+            and classify various human activities based on video footage and achieve high accuracy. The goal is to create a website 
+            that can take video or url of video as input and distinguish activity and show the name of activity that was performed 
+            in given video
+          </p>
+          <img src={harProblem} alt="" className='w-1/3' />
+        </div>
         <h4 className='text-3xl font-semibold'>PURPOSE</h4>
-        <p className='my-5'>
+        <div className='my-5'>
           <div className='text-2xl'>
             <div className='flex items-center my-2'>
               <img src={purpose1} alt="" className='w-28 rounded-full' />
@@ -63,7 +67,7 @@ export default function Home() {
               <p className='w-2/3 m-4'>Implement the HAR model as a soft\Nare application that can be used to analyze video footage from a variety of sources. </p>
             </div>
           </div>
-        </p>
+        </div>
         <h4 className='text-3xl font-semibold' style={{fontFamily: 'monospace'}}>OBJECTIVE</h4>
         <div className='grid grid-flow-col place-items-center'>
           <div className='text-2xl'>

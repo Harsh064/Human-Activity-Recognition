@@ -92,17 +92,17 @@ export default function Main({ video, setVideo, alert, setAlert, processingStatu
         <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="gym" value={0} className='w-0 h-0 hidden' />
         <label htmlFor="gym" className={`flex items-center mx-2 rounded text-white ${activity === '0' ? 'bg-slate-500' : 'bg-slate-400'}`}>
           <img src={gymIcon} alt="" className='w-10' />
-          <p className='pr-2 py-2'>Gym</p>
+          <p className='pr-2 py-2'>Gym Activity</p>
         </label>
         <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="musical" value={1} className='w-0 h-0 hidden' />
         <label htmlFor="musical" className={`flex items-center mx-2 rounded text-white ${activity === '1' ? 'bg-slate-500' : 'bg-slate-400'}`}>
           <img src={musicalIcon} alt="" className='w-10' />
-          <p className='pr-2 py-2'>Musical</p>
+          <p className='pr-2 py-2'>Musical Activity</p>
         </label>
         <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="olympic" value={2} className='w-0 h-0 hidden' />
         <label  htmlFor="olympic" className={`flex items-center mx-2 rounded text-white ${activity === '2' ? 'bg-slate-500' : 'bg-slate-400'}`}>
           <img src={olympicIcon} alt="" className='w-10' />
-          <p className='pr-2 py-2'>Olympic</p>
+          <p className='pr-2 py-2'>Olympic Games</p>
         </label>
       </div>
     </div>
