@@ -1,6 +1,6 @@
 import shreyashPhoto from '../assets/shreyash.jpg';
 import ashutoshPhoto from '../assets/ashutosh.jpg';
-import harshavardhanPhoto from '../assets/harshavardhan.jpg';
+import harshavardhanPhoto from '../assets/harshavardhan.jpeg';
 import yashPhoto from '../assets/yash.jpg';
 
 export const team = [
@@ -12,7 +12,7 @@ export const team = [
     },
     {
       name: 'Ashutosh Kotate',
-      role: 'All rounder',
+      role: 'Research co-ordinator',
       description: 'Ashutosh is good in capturing and organizing knowledge efficiently. This individual likely excels in creating clear, comprehensive records that facilitate information sharing and decision-making, embodying the essence of clarity and precision in every document crafted.',
       photo: ashutoshPhoto,
     },

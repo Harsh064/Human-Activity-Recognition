@@ -33,7 +33,7 @@ export default function Home() {
             <p className='my-5 w-5/6'>
               Human Activity Recognition (HAR) has emerged as a crucial field at the intersection of artificial intelligence and
               machine learning. It involves the detection and classification of human actions or activities
-              based on data collected from various sensors.
+              based on data collected.
             </p>
             <Link to={'/viaVideo'} className='px-4 py-2 rounded bg-gradient-to-r from-violet-400 to-red-300 hover:from-red-300 hover:to-violet-400 font-semibold active:bg-blue-400'>Get Started</Link>
           </div>
@@ -46,18 +46,18 @@ export default function Home() {
       <div className='p-28 pt-16 pb-16'>
         <div className='flex justify-center mb-10'><h2>ABOUT PROJECT</h2></div>
         <h4 className='text-3xl font-semibold'>PROBLEM STATEMENT</h4>
-        <div className='flex justify-between items-center my-5 text-2xl'>
+        <div className='flex justify-between items-center my-5 text-lg'>
           <p className='w-3/5'>
             Create a real-time human activity recognition system using OpenCV and Deep Learning that should be able to idntify 
             and classify various human activities based on video footage and achieve high accuracy. The goal is to create a website 
             that can take video or url of video as input and distinguish activity and show the name of activity that was performed 
             in given video
           </p>
-          <img src={harProblem} alt="" className='w-1/3' />
+          <img src={harProblem} alt="" className='w-[30%]' />
         </div>
         <h4 className='text-3xl font-semibold'>PURPOSE</h4>
         <div className='my-5'>
-          <div className='text-2xl'>
+          <div className='text-lg'>
             <div className='flex items-center my-2'>
               <img src={purpose1} alt="" className='w-28 rounded-full' />
               <p className='w-2/3 m-4'>To develop a CNN-based human action recognition (HAR) system that can achieve state-of-the-art results on a public HAR dataset. </p>
@@ -70,7 +70,7 @@ export default function Home() {
         </div>
         <h4 className='text-3xl font-semibold' style={{fontFamily: 'monospace'}}>OBJECTIVE</h4>
         <div className='grid grid-flow-col place-items-center'>
-          <div className='text-2xl'>
+          <div className='text-lg'>
             <p className='flex items-center my-2'>
               <div><span className='px-3 py-2 bg-black text-white rounded-lg'>01</span></div>              
               <p className='m-4'>Develop a HAR system that can accurately recognize a variety of human activities.</p>
@@ -144,13 +144,13 @@ export default function Home() {
             <img src={phoneIcon} alt="" className='p-2 w-10 h-10 rounded-full bg-gray-500' />
             <p className='pt-3 font-bold text-xl'>PHONE</p>
             <p className='pt-2 font-semibold'>Shreyash Madake</p>
-            <p className='font-thin text-sm'>+91 9829230028</p>
+            <p className='font-thin text-sm'>+91 8180955091</p>
             <p className='pt-2 font-semibold'>Ashutosh Kokate</p>
-            <p className='font-thin text-sm'>+91 9829230028</p>
+            <p className='font-thin text-sm'>+91 9309879912</p>
             <p className='pt-2 font-semibold'>Harshavardhan Patil</p>
-            <p className='font-thin text-sm'>+91 9829230028</p>
+            <p className='font-thin text-sm'>+91 9518326084</p>
             <p className='pt-2 font-semibold'>Yash Bhandure</p>
-            <p className='font-thin text-sm'>+91 9423803119</p>
+            <p className='font-thin text-sm'>+91 9323803119</p>
           </div>
 
           <div className='grid grid-flow-row justify-items-center'>

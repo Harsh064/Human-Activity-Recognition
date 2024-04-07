@@ -102,7 +102,7 @@ export default function Main({ video, setVideo, alert, setAlert, processingStatu
         <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="olympic" value={2} className='w-0 h-0 hidden' />
         <label  htmlFor="olympic" className={`flex items-center mx-2 rounded text-white ${activity === '2' ? 'bg-slate-500' : 'bg-slate-400'}`}>
           <img src={olympicIcon} alt="" className='w-10' />
-          <p className='pr-2 py-2'>Olympic Games</p>
+          <p className='pr-2 py-2'>Games</p>
         </label>
       </div>
     </div>
