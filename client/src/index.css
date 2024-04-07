@@ -25,6 +25,15 @@ h2 {
   -webkit-text-fill-color: transparent;
 }
 
+h4 {
+  display: inline;
+  font-size: 30px;
+  font-weight: bold;
+  background: -webkit-linear-gradient(right,#868686 20%, #000000 80%);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 #member-name {
   font-size: 18px;
   font-weight: 500;

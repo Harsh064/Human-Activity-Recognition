@@ -1,42 +1,54 @@
 import React from 'react';
-import { popupAlert } from '../utils/popupAlert';
+import { socket } from '../utils/socket';
 
-export default function UploadviaFile({ setVideo, setAlert, setProcessingStatus }) {
-  async function uploadVideo(e) {
-    const formdata = new FormData();
-    formdata.append("video", e.target.files[0]);
+export default function UploadviaFile({ activity, setVideo, setAlert, setProcessingStatus }) {
+  function uploadVideo(e) {
     setProcessingStatus(true);
-    setVideo("");
 
-    const response = await fetch("http://127.0.0.1:5000/upload/video", {
-      method: 'POST',
-      headers: {
-        Accept: "video/*, application/json",
-        "Access-Control-Allow-Credentials": true,
-      },
-      body: formdata
-    });
-    const data = await response.blob();
-
+    const file = e.target.files[0];
     const reader = new FileReader();
-    reader.readAsDataURL(data);
     reader.onload = (e) => {
-      setVideo(e.target.result);
+      const buffer = e.target.result;
+      const fileMetaData = JSON.stringify({
+        lastModified: file.lastModified,
+        name: file.name,
+        size: file.size,
+        type: file.type
+      })
+
+      const enc = new TextEncoder();
+      const buf1 = enc.encode('!');
+      const buf2 = enc.encode(activity);
+      const buf3 = enc.encode(',');
+      const buf4 = enc.encode(fileMetaData);
+      const buf5 = enc.encode('\r\n\r\n');
+      const buf6 = new Uint8Array(buffer);
+
+      const bufferData = new Uint8Array(buf1.byteLength + buf2.byteLength + buf3.byteLength + buf4.byteLength + buf5.byteLength + buf6.byteLength);
+      bufferData.set(buf1, 0);
+      bufferData.set(buf2, buf1.byteLength);
+      bufferData.set(buf3, buf1.byteLength + buf2.byteLength);
+      bufferData.set(buf4, buf1.byteLength + buf2.byteLength + buf3.byteLength);
+      bufferData.set(buf5, buf1.byteLength + buf2.byteLength + buf3.byteLength + buf4.byteLength);
+      bufferData.set(buf6, buf1.byteLength + buf2.byteLength + buf3.byteLength + buf4.byteLength + buf5.byteLength);
+      
+      console.log(bufferData.byteLength)
+
+      socket.emit('viaVideo', bufferData);
     }
 
-    setProcessingStatus(false);
-    popupAlert('success', 'Video processing completed and received', setAlert);
+    reader.readAsArrayBuffer(file);
   }
   
   return (
     <div className='h-[80%]'>
-      <div className='origin-center translate-y-40 grid grid-rows-2 place-items-center'>
-        <p className='m-5 text-sm text-gray-400 text-center'>
+      <div className='origin-center translate-y-20 grid grid-rows-2 place-items-center'>
+        <p className='m-5 text-sm text-gray-500 text-center'>
           Please upload one of the following video file types: <br />
           MP4, MPV, MPG, MTS MOV, WMV, AVI, AVCHD, FLV, F4V, SWF, MKV
         </p>
         <label onChange={(e) => uploadVideo(e)}>
-          <span className='px-4 py-2 rounded bg-blue-500 text-white font-semibold active:bg-blue-400'>Select Video</span>
+          <span className='px-4 py-2 rounded bg-slate-700 text-white font-semibold hover:bg-slate-600 active:bg-slate-800'>Select Video</span>
           <input type="file" name="video" accept='video/*' className='hidden w-0 h-0' />
         </label>            
       </div>
