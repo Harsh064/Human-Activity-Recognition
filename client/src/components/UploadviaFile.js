@@ -3,6 +3,7 @@ import { socket } from '../utils/socket';
 
 export default function UploadviaFile({ activity, setVideo, setAlert, setProcessingStatus }) {
   function uploadVideo(e) {
+    if (e.target.files[0] === undefined) return ;
     setProcessingStatus(true);
 
     const file = e.target.files[0];

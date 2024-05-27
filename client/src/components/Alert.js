@@ -21,7 +21,7 @@ export default function Alert({ alert }) {
 
   return (
     alert.visibility ?
-    <div className={`flex items-center absolute top-28 w-full px-5 py-1 ${style[alert.status]} text-white`}>
+    <div data-testid='alertpopup' className={`flex items-center absolute top-28 w-full px-5 py-1 ${style[alert.status]} text-white`}>
       <img src={images[alert.status]} alt="" className='w-8' />
       <p className='px-4'>{ alert.message }</p>
     </div> : null

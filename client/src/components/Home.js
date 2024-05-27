@@ -45,8 +45,8 @@ export default function Home() {
 
       <div className='p-28 pt-16 pb-16'>
         <div className='flex justify-center mb-10'><h2>ABOUT PROJECT</h2></div>
-        <h4 className='text-3xl font-semibold'>PROBLEM STATEMENT</h4>
-        <div className='flex justify-between items-center my-5 text-lg'>
+        <h4 className='text-2xl font-semibold' style={{fontFamily: 'monospace'}}>PROBLEM STATEMENT</h4>
+        <div className='flex justify-between items-center text-lg'>
           <p className='w-3/5'>
             Create a real-time human activity recognition system using OpenCV and Deep Learning that should be able to idntify 
             and classify various human activities based on video footage and achieve high accuracy. The goal is to create a website 
@@ -55,8 +55,8 @@ export default function Home() {
           </p>
           <img src={harProblem} alt="" className='w-[30%]' />
         </div>
-        <h4 className='text-3xl font-semibold'>PURPOSE</h4>
-        <div className='my-5'>
+        <h4 className='text-2xl font-semibold' style={{fontFamily: 'monospace'}}>PURPOSE</h4>
+        <div className=''>
           <div className='text-lg'>
             <div className='flex items-center my-2'>
               <img src={purpose1} alt="" className='w-28 rounded-full' />
@@ -64,35 +64,35 @@ export default function Home() {
             </div>
             <div className='flex items-center my-2'>              
               <img src={purpose2} alt="" className='w-28 rounded-full' />
-              <p className='w-2/3 m-4'>Implement the HAR model as a soft\Nare application that can be used to analyze video footage from a variety of sources. </p>
+              <p className='w-2/3 m-4'>Implement the HAR model as a software application that can be used to analyze video footage from a variety of sources. </p>
             </div>
           </div>
         </div>
-        <h4 className='text-3xl font-semibold' style={{fontFamily: 'monospace'}}>OBJECTIVE</h4>
+        <h4 className='text-2xl font-semibold mt-80' style={{fontFamily: 'monospace'}}>OBJECTIVE</h4>
         <div className='grid grid-flow-col place-items-center'>
           <div className='text-lg'>
-            <p className='flex items-center my-2'>
-              <div><span className='px-3 py-2 bg-black text-white rounded-lg'>01</span></div>              
+            <div className='flex items-center my-2'>
+              <p><span className='px-3 py-2 bg-black text-white rounded-lg'>01</span></p>              
               <p className='m-4'>Develop a HAR system that can accurately recognize a variety of human activities.</p>
-            </p>
-            <p className='flex items-center my-2'>              
-              <div><span className='px-3 py-2 bg-black text-white rounded-lg'>02</span></div>
+            </div>
+            <div className='flex items-center my-2'>              
+              <p><span className='px-3 py-2 bg-black text-white rounded-lg'>02</span></p>
               <span className='m-4'>Evaluate the performance of the HAR system on a variety of datasets. </span>
-            </p>
-            <p className='flex items-center my-2'>
-              <div><span className='px-3 py-2 bg-black text-white rounded-lg'>03</span></div>
+            </div>
+            <div className='flex items-center my-2'>
+              <p><span className='px-3 py-2 bg-black text-white rounded-lg'>03</span></p>
               <span className='m-4'>Identify the challenges and limitations of the HAR system</span>
-            </p>
+            </div>
           </div>
-          <img src={objectives} alt="" className='w-[20rem] rounded-full' />
+          <img src={objectives} alt="" className='w-[17rem] rounded-full' />
         </div>
         <hr id='application' className='border-none py-8' />
 
         <div className='flex justify-center'><h2>APPLICATION</h2></div>
         <div className='grid grid-rows-2 grid-cols-3 justify-center gap-10 my-5'>
           {
-            applications.map((application) => {
-              return <ApplicationCard application={application} />
+            applications.map((application, index) => {
+              return <ApplicationCard key={index} application={application} />
             })
           }
         </div>
@@ -110,7 +110,7 @@ export default function Home() {
             analysis, and human-computer interaction.</p>
           <p className='flex justify-center text-4xl'>Working of Convolutional neural networks</p>
           <div className='flex justify-center my-10'><img src={cnn} alt="" className='w-5/6' /></div>
-          <p className='p-4'>            
+          <div className='p-4'>            
             Convolutional neural networks are distinguished from other neural networks by their superior performance with image, 
             speech, or audio signal inputs. They have three main types of layers, which are:
             <ul className='p-4 list-disc list-inside'>
@@ -123,7 +123,7 @@ export default function Home() {
             CNN increases in its complexity, identifying greater portions of the image. Earlier layers focus on simple features, 
             such as colors and edges. As the image data progresses through the layers of the CNN, it starts to recognize larger 
             elements or shapes of the object until it finally identifies the intended object.
-          </p>
+          </div>
         </div>
         <hr id='team' className='border-none py-8' />
 
@@ -131,8 +131,8 @@ export default function Home() {
         <p className='px-28 py-10 text-center text-lg text-gray-600'>Get to know the brilliant minds behind HAR! A team of fresh minds, innovators, and problem-solvers. We're on a mission to reshape how we perceive the world, and we're always up for any challenge that comes our way.</p>
         <div className='grid grid-flow-col place-content-center gap-7 w-full my-5'>
           {
-            team.map((member) => {
-              return <MemberCard member={member} />;
+            team.map((member, index) => {
+              return <MemberCard key={index} member={member} />;
             })
           }
         </div>

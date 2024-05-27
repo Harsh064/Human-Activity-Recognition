@@ -1,5 +1,4 @@
-from flask import Flask, request, jsonify, Response, send_from_directory
-from werkzeug.utils import secure_filename
+from flask import Flask, request
 from flask_cors import CORS
 from flask_socketio import *
 from moviepy.editor import *
@@ -44,8 +43,6 @@ def viaVideo(videobuffer):
     fileextension = os.path.splitext(fname)[1]
     filename = dt.datetime.now().strftime("%d%m%Y%H%M%S%f")
     video_file_path = os.path.join(app.config['UPLOAD_FOLDER'], f'{filename}{fileextension}')
-
-    print(activity)
 
     with open(video_file_path, "wb") as binary_file:
         binary_file.write(fileBuffer)

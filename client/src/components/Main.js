@@ -89,7 +89,7 @@ export default function Main({ video, setVideo, alert, setAlert, processingStatu
       </div>
 
       <div className='flex justify-center'>
-        <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="gym" value={0} className='w-0 h-0 hidden' />
+        <input onClick={(e) => setActivity(e.target.value)} type="radio" name="activity" id="gym" value={0} defaultChecked className='w-0 h-0 hidden' />
         <label htmlFor="gym" className={`flex items-center mx-2 rounded text-white ${activity === '0' ? 'bg-slate-500' : 'bg-slate-400'}`}>
           <img src={gymIcon} alt="" className='w-10' />
           <p className='pr-2 py-2'>Gym Activity</p>

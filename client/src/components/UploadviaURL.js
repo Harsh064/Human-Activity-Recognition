@@ -12,7 +12,6 @@ export default function UploadviaURL({ activity, setVideo, setAlert, setProcessi
     };
 
     const regex = /^((?:https?:)?\/\/)?(((?:www|m)\.)?(youtube\.com(?:(\/shorts\/|\/watch\/|\/v\/)[\w-]{11}|\/watch\?v=[\w-]{11}((&list=LL)?(&index=[\d]+)?|(&index=[\d]+)?(&list=LL)?)|(\/embed\/[\w-]{11}(\?si=[\w-]{16})?)))|youtu\.be\/[\w-]{11}(\?si=[\w-]{16})?)$/i;
-    console.log(regex.test(url))
     if (!regex.test(url)) {
       popupAlert({ status: 'danger', message: 'Invalid youtube URL' }, setAlert);
       return ;
